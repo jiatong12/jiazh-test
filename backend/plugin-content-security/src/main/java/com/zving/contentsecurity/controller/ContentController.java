@@ -64,7 +64,7 @@ public class ContentController {
 	@Priv(CSMenus.ContentSecurity.ContentMenu.view)
 	@GetMapping("/{id}")
 	public Report<DataTable> get(@PathVariable("id") long id) {
-		Q q = new Q("select c.ID as id, c.Title as title, c.OriginalContent as originalContent, "
+		Q q = new Q("select c.ID as id, c.Title as title, "
 				+ "c.EncryptedContent as encryptedContent, c.CategoryID as categoryID, c.Status as status, "
 				+ "c.AddTime as addTime, c.AddUser as addUser, c.ModifyTime as modifyTime, c.ModifyUser as modifyUser, "
 				+ "cat.CategoryName as categoryName from ZSContent c left join ZSCategory cat on c.CategoryID = cat.ID where c.ID = ? ", id);

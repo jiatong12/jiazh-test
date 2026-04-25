@@ -1,47 +1,115 @@
 <script setup lang="ts">
 import axios from 'axios'
+import { useResizeObserver } from '@vueuse/core'
+
+const CJK_START = 0x4E00
+const CJK_END = 0x9FFF
+const SHIFT = 1000
+const RANGE = CJK_END - CJK_START + 1
+
+function decrypt(encrypted: string): string {
+  if (!encrypted)
+    return ''
+  let result = ''
+  for (const ch of encrypted) {
+    const code = ch.codePointAt(0)!
+    if (code >= CJK_START && code <= CJK_END) {
+      const offset = code - CJK_START
+      const shifted = (offset - SHIFT + RANGE) % RANGE
+      result += String.fromCodePoint(CJK_START + shifted)
+    }
+    else {
+      result += ch
+    }
+  }
+  return result
+}
 
 const visible = ref(false)
 const loading = ref(false)
 const contentData = ref<any>(null)
+const plainText = ref('')
 
-const FONT_LOADED_KEY = 'cs-font-loaded'
+const canvasRef = useTemplateRef('canvasRef')
+const wrapRef = useTemplateRef('wrapRef')
 
-function ensureFontLoaded() {
-  if (document.fonts.check('16px ObfuscatedContent')) return
-  if (document.querySelector('style[data-cs-font]')) return
-  const style = document.createElement('style')
-  style.setAttribute('data-cs-font', 'true')
-  style.textContent = `
-    @font-face {
-      font-family: 'ObfuscatedContent';
-      src: url('/api/front/cs/font') format('woff');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+function renderCanvas() {
+  const canvas = canvasRef.value
+  const wrap = wrapRef.value
+  if (!canvas || !wrap || !plainText.value)
+    return
+
+  const dpr = window.devicePixelRatio || 1
+  const width = wrap.clientWidth - 32 // padding
+  if (width <= 0)
+    return
+
+  const ctx = canvas.getContext('2d')!
+  const fontSize = 16
+  const lineHeight = fontSize * 1.8
+  const font = `${fontSize}px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif`
+
+  ctx.font = font
+
+  // Word wrap
+  const lines: string[] = []
+  for (const paragraph of plainText.value.split('\n')) {
+    if (paragraph === '') {
+      lines.push('')
+      continue
     }
-  `
-  document.head.appendChild(style)
+    let currentLine = ''
+    for (const ch of paragraph) {
+      const testLine = currentLine + ch
+      const metrics = ctx.measureText(testLine)
+      if (metrics.width > width && currentLine) {
+        lines.push(currentLine)
+        currentLine = ch
+      }
+      else {
+        currentLine = testLine
+      }
+    }
+    if (currentLine)
+      lines.push(currentLine)
+  }
+
+  const height = Math.max(lines.length * lineHeight + 32, 60)
+
+  canvas.width = width * dpr
+  canvas.height = height * dpr
+  canvas.style.width = `${width}px`
+  canvas.style.height = `${height}px`
+  ctx.scale(dpr, dpr)
+
+  ctx.font = font
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--el-text-color-primary').trim() || '#303133'
+  ctx.textBaseline = 'top'
+
+  for (let i = 0; i < lines.length; i++) {
+    ctx.fillText(lines[i], 0, 16 + i * lineHeight)
+  }
 }
 
 function open(id: number) {
   loading.value = true
   visible.value = true
   contentData.value = null
-  ensureFontLoaded()
+  plainText.value = ''
 
   axios.get(`/ui/cs/contents/${id}`).then(({ data }) => {
     if (data.status === 1) {
       const row = Array.isArray(data.data) ? data.data[0] : data.data
+      const encrypted = row.encryptedContent || row.EncryptedContent || ''
       contentData.value = {
         title: row.title || row.Title,
-        originalContent: row.originalContent || row.OriginalContent,
-        encryptedContent: row.encryptedContent || row.EncryptedContent,
         categoryName: row.categoryName || row.CategoryName,
         status: row.status ?? row.Status,
         addUser: row.addUser || row.AddUser,
         addTime: row.addTime || row.AddTime,
       }
+      plainText.value = decrypt(encrypted)
+      nextTick(renderCanvas)
     }
   }).finally(() => {
     loading.value = false
@@ -51,16 +119,12 @@ function open(id: number) {
 function handleClose() {
   visible.value = false
   contentData.value = null
+  plainText.value = ''
 }
 
-function handleCopy(e: ClipboardEvent) {
-  e.preventDefault()
-  e.clipboardData?.setData('text/plain', '')
-}
-
-function handleContextMenu(e: Event) {
-  e.preventDefault()
-}
+useResizeObserver(wrapRef, () => {
+  renderCanvas()
+})
 
 defineExpose({ open })
 </script>
@@ -80,18 +144,9 @@ defineExpose({ open })
           </div>
         </div>
 
-        <ElDivider content-position="left">安全展示（使用混淆字体，无法直接复制）</ElDivider>
-        <div
-          class="encrypted-content"
-          @copy="handleCopy"
-          @contextmenu="handleContextMenu"
-        >
-          {{ contentData.encryptedContent }}
-        </div>
-
-        <ElDivider content-position="left">原文内容（仅管理可见）</ElDivider>
-        <div class="original-content">
-          {{ contentData.originalContent }}
+        <ElDivider content-position="left">内容展示</ElDivider>
+        <div ref="wrapRef" class="canvas-wrap">
+          <canvas ref="canvasRef" />
         </div>
       </template>
     </div>
@@ -120,28 +175,10 @@ defineExpose({ open })
   font-size: 13px;
 }
 
-.encrypted-content {
+.canvas-wrap {
   padding: 16px;
-  font-family: 'ObfuscatedContent', serif;
-  font-size: 16px;
-  line-height: 1.8;
   background-color: var(--el-fill-color-light);
   border-radius: 4px;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.original-content {
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.8;
-  background-color: var(--el-fill-color-lighter);
-  border-radius: 4px;
-  white-space: pre-wrap;
-  word-break: break-all;
+  overflow-x: auto;
 }
 </style>
