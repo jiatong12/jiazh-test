@@ -75,6 +75,19 @@ public class ContentController {
 		return Report.data(dt);
 	}
 
+	@Priv(CSMenus.ContentSecurity.ContentMenu.edit)
+	@GetMapping("/{id}/edit")
+	public Report<DataTable> getForEdit(@PathVariable("id") long id) {
+		Q q = new Q("select c.ID as id, c.Title as title, "
+				+ "c.OriginalContent as originalContent, c.CategoryID as categoryID, c.Status as status "
+				+ "from ZSContent c where c.ID = ? ", id);
+		DataTable dt = q.executeDataTable();
+		if (dt.getRowCount() == 0) {
+			return Report.fail("内容不存在");
+		}
+		return Report.data(dt);
+	}
+
 	@Priv(CSMenus.ContentSecurity.ContentMenu.add)
 	@PostMapping("")
 	public Report<ZSContent> create(@Valid @RequestBody ContentSaveRequest request) {

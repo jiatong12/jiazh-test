@@ -27,7 +27,7 @@ function open(id?: number) {
   resetFormData()
 
   if (id) {
-    axios.get(`/ui/cs/contents/${id}`).then(({ data }) => {
+    axios.get(`/ui/cs/contents/${id}/edit`).then(({ data }) => {
       if (data.status === 1) {
         const row = Array.isArray(data.data) ? data.data[0] : data.data
         formData.value.title = row.title || row.Title
