@@ -1,0 +1,50 @@
+import type { FormInstance, FormItemProp } from 'element-plus'
+import { ref } from 'vue'
+
+const isDisabled = ref(false)
+const timer = ref()
+const text = ref('')
+
+export function useVerifyCode() {
+  const start = async (
+    formEl: FormInstance | undefined,
+    props: FormItemProp,
+    time = 60,
+  ) => {
+    if (!formEl) { return }
+    const initTime = time
+    await formEl.validateField(props, (isValid) => {
+      if (isValid) {
+        window.clearInterval(timer.value)
+        isDisabled.value = true
+        text.value = `${time}`
+        timer.value = window.setInterval(() => {
+          if (time > 0) {
+            time -= 1
+            text.value = `${time}`
+          }
+          else {
+            text.value = ''
+            isDisabled.value = false
+            window.clearInterval(timer.value)
+            time = initTime
+          }
+        }, 1000)
+      }
+    })
+  }
+
+  const end = () => {
+    text.value = ''
+    isDisabled.value = false
+    clearInterval(timer.value)
+  }
+
+  return {
+    isDisabled,
+    timer,
+    text,
+    start,
+    end,
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<framework>
+	<databases>
+		<database name="Default">
+			<config name="Type">MYSQL</config>
+			<config name="ServerAddress">localhost</config>
+			<config name="Port">3306</config>
+			<config name="Name">practice_demo_1</config>
+			<config name="UserName">root</config>
+			<config name="Password">$KEYQ5Gr+1iga2Q=</config>
+			<config name="MaxConnCount">100</config>
+			<config name="InitConnCount">5</config>
+			<config name="Charset">utf8mb4</config>
+		</database>
+	</databases>
+</framework>

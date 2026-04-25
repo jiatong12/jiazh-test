@@ -1,0 +1,61 @@
+// 媒体查询-设备尺寸
+// notebook
+$device-notebook: 1600px;
+// ipad pro
+$device-ipad-pro: 1180px;
+// ipad
+$device-ipad: 800px;
+// ipad-竖屏
+$device-ipad-vertical: 900px;
+// mobile
+$device-phone: 500px;
+
+:root {
+  // 定义颜色变量，方便代码中使用
+  // 定义主题颜色
+  // 定义各位置颜色
+  // 定义边框弧度
+  --zv-text-color-primary: var(--el-text-color-primary); // 主文字颜色
+  --zv-text-color-secondary: var(--el-text-color-secondary); // 二级文字颜色
+
+  // 主颜色
+  --zv-primary: var(--el-color-primary);
+  --zv-primary-1: var(--el-color-primary-light-1);
+  --zv-primary-2: var(--el-color-primary-light-2);
+  --zv-primary-3: var(--el-color-primary-light-3);
+  --zv-primary-4: var(--el-color-primary-light-4);
+  --zv-primary-5: var(--el-color-primary-light-5);
+  --zv-primary-6: var(--el-color-primary-light-6);
+  --zv-primary-7: var(--el-color-primary-light-7);
+  --zv-primary-8: var(--el-color-primary-light-8);
+  --zv-primary-9: var(--el-color-primary-light-9);
+
+  --zv-info: var(--el-color-info);
+  --zv-success: var(--el-color-success);
+  --zv-warning: var(--el-color-warning);
+  --zv-danger: var(--el-color-danger);
+  --zv-bg-color: var(--el-bg-color);
+  --zv-bg-color-page: var(--el-bg-color-page);
+
+  --zv-gray-100: #f9fafb;
+  --zv-gray-200: #f2f4f5;
+  --zv-gray-300: #e6eaeb;
+  --zv-gray-400: #dbdfe1;
+  --zv-gray-500: #949eb7;
+  --zv-gray-600: #7987a1;
+  --zv-gray-700: #4d5875;
+  --zv-gray-800: #383853;
+  --zv-gray-900: #323251;
+}
+
+html.dark {
+  --zv-gray-100: #110f0f;
+  --zv-gray-200: #17171c;
+  --zv-gray-300: #393946;
+  --zv-gray-400: #505062;
+  --zv-gray-500: #73738c;
+  --zv-gray-600: #8f8fa3;
+  --zv-gray-700: #ababba;
+  --zv-gray-800: #c7c7d1;
+  --zv-gray-900: #e3e3e8;
+}

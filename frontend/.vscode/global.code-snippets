@@ -1,0 +1,43 @@
+{
+  "import": {
+    "scope": "javascript,typescript",
+    "prefix": "im",
+    "body": ["import { $2 } from '$1';"],
+    "description": "Import a module",
+  },
+  "export-all": {
+    "scope": "javascript,typescript",
+    "prefix": "ex",
+    "body": ["export * from '$1';"],
+    "description": "Export a module",
+  },
+  "vue-script-setup": {
+    "scope": "vue",
+    "prefix": "<sc",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "const props = defineProps<{",
+      "  modelValue?: boolean,",
+      "}>()",
+      "$1",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    <slot/>",
+      "  </div>",
+      "</template>",
+    ],
+  },
+  "vue-computed": {
+    "scope": "javascript,typescript,vue",
+    "prefix": "com",
+    "body": ["computed(() => { $1 })"],
+  },
+  "group-comment": {
+    "scope": "javascript,typescript,vue,jsx,tsx",
+    "prefix": "gc",
+    "body": ["// ----------------- $1相关 -----------------"],
+    "description": "Insert a grouped comment",
+  }
+}

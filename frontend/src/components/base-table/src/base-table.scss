@@ -1,0 +1,226 @@
+@use '@/styles/var.scss' as *;
+
+.base-table {
+  // 根据容器高度自适应，只滚动内容
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  // min-height: 0; // 避免内容溢出
+  min-height: 120px; // 避免内容溢出
+
+  gap: 10px;
+
+  // position: relative;
+  // padding: 10px 0;
+
+  .base-table-header {
+    margin-bottom: 10px;
+  }
+  .table-wrap {
+    // margin-top: 10px;
+    // height: 100%;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.base-table--card {
+    &.base-table__list-mode {
+      .base-table-header {
+        box-sizing: border-box;
+        padding: 15px;
+        background-color: var(--el-bg-color);
+        border: 1px solid var(--el-border-color-light);
+        border-radius: var(--el-border-radius-base);
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.03),
+          0 1px 2px -1px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    &.base-table__table-mode {
+      .table-wrap {
+        box-sizing: border-box;
+        padding: 15px;
+        background-color: var(--el-bg-color);
+        border: 1px solid var(--el-border-color-light);
+        border-radius: var(--el-border-radius-base);
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.03),
+          0 1px 2px -1px rgba(0, 0, 0, 0.08);
+        // width: 100%;
+      }
+    }
+  }
+
+  .el-table {
+    flex: 1;
+    min-height: 120px;
+
+    :deep() .el-table__header th {
+      // background: var(--el-fill-color-light);
+    }
+
+    // 解决表格数据为空时样式不居中问题(仅在element-plus中)
+    .el-table__empty-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .table-empty {
+        line-height: 30px;
+      }
+    }
+  }
+
+  // 表头宽度可拖动
+  &.base-table--borderless-resizable {
+    :deep(.el-table--border) {
+      &::before,
+      &::after,
+      .el-table__border-left-patch,
+      .el-table__inner-wrapper::after {
+        display: none;
+      }
+
+      .el-table__body-wrapper,
+      .el-table__footer-wrapper {
+        .el-table__cell {
+          border-right: none;
+        }
+      }
+
+      .el-table__header-wrapper {
+        th.el-table__cell {
+          border-right: none;
+
+          &:not(.gutter):not(:last-child)::before {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 2px;
+            height: 16px;
+            content: '';
+            background-color: var(--el-table-border-color);
+            transform: translateY(-50%);
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+
+  .el-pagination {
+    display: flex;
+    justify-content: flex-end;
+    // margin-top: 10px;
+    margin: 0 10px;
+  }
+
+  // // 移动端分页
+  // @media (max-width: $device-phone) {
+  //   :deep(.el-pagination) {
+  //     display: flex;
+  //     flex-wrap: wrap;
+  //     gap: 15px 0;
+  //     align-items: center;
+  //     justify-content: center;
+  //   }
+  // }
+}
+
+.base-table-simple-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  > * {
+    // 子搜索项默认宽度
+    width: 215px;
+  }
+}
+
+.search-form-enter-active,
+.search-form-leave-active {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-form-enter-from,
+.search-form-leave-to {
+  max-height: 0;
+  // opacity: 0;
+}
+
+.search-form-enter-to,
+.search-form-leave-from {
+  // max-height: 1000px;
+  max-height: 100%;
+  // opacity: 1;
+}
+
+// 列表
+.base-table-list-wrap {
+  flex: 1;
+}
+:deep() .base-table-list {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.base-table-list-empty {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+// 列表项默认样式，想调整就默认覆盖
+.base-table-list-item {
+  border: 1px solid var(--el-border-color-light);
+  border-radius: var(--el-border-radius-base);
+  padding: 16px;
+  background-color: var(--el-fill-color-blank);
+  transition: box-shadow 0.3s;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(var(--el-color-primary-rgb), 0.2);
+  }
+
+  &.item-selected {
+    border-color: var(--el-color-primary) !important;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 16px solid var(--el-color-primary);
+      border-left: 16px solid transparent;
+      border-right: 16px solid var(--el-color-primary);
+      border-bottom: 16px solid transparent;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      right: 4px;
+      width: 10px;
+      height: 5px;
+      border-left: 3px solid var(--el-color-white);
+      border-bottom: 3px solid var(--el-color-white);
+      transform: rotate(-45deg);
+      z-index: 1;
+    }
+  }
+}

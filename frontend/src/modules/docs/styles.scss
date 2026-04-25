@@ -1,0 +1,38 @@
+.docs-page {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+.docs-page-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--el-text-color-regular);
+  line-height: 1.9;
+
+  li + li {
+    margin-top: 8px;
+  }
+}
+
+.docs-inline-code,
+.docs-code-text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: var(--el-border-radius-small);
+  background: var(--el-fill-color-light);
+  color: var(--el-color-primary);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.docs-inline-code {
+  min-height: 22px;
+  vertical-align: middle;
+}

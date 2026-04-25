@@ -1,0 +1,124 @@
+{
+  // 保存自动格式化
+  // "editor.formatOnSave": true,
+  // "editor.formatOnType": true,
+  // 每次按照 eslint 格式进行修复
+  // "eslint.format.enable": true,
+  // 自动修复
+  "editor.codeActionsOnSave": {
+    // "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  "editor.formatOnSave": false,
+
+  // 重新设定tabsize
+  "editor.tabSize": 2,
+  // 在使用搜索功能时，将这些文件夹/文件排除在外
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/public": true,
+    "**/target": true,
+    "**/logs": true,
+    "/dist": true,
+    "pnpm-lock.yaml": true
+  },
+  // 开启文件嵌套
+  // "explorer.fileNesting.enabled": false,
+  // 默认是展开状态
+  // "explorer.fileNesting.expand": false,
+  // 文件嵌套规则
+  // "explorer.fileNesting.patterns": {
+  // ".env": ".env.*"
+  // "index.html": "LICENSE,.gitignore,README*.md,stats.html",
+  // "vite.config.ts": "package.json,uno.config.ts,tsconfig.json,*.toml,.npmrc,.nvmrc,renovate.json,CHANGELOG.md,.dockerignore,dockerfile,vite.config.*.ts,eslint.config.js,.editorconfig,commitlint.config.cjs,postcss.config.js,.eslintrc-auto-import.json"
+  // },
+  // ctrl + shify + 滚轮 改变文字大小
+  "editor.fontLigatures": false,
+  "editor.mouseWheelZoom": true,
+  "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "Vitesse",
+    "Vite",
+    "unocss",
+    "vitest",
+    "vueuse",
+    "pinia",
+    "demi",
+    "antfu",
+    "iconify",
+    "intlify",
+    "vitejs",
+    "unplugin",
+    "pnpm",
+    "commitlint",
+    "taze",
+    "echarts",
+    "wangeditor",
+    "swiper",
+    "splitpanes",
+    "esign",
+    "xgplayer",
+    "screenfull",
+    "nprogress",
+    "sortablejs",
+    "qrcode",
+    "bytemd",
+    "antv",
+    "blockly",
+    "unref",
+    "auths",
+    "axios"
+  ],
+  // "i18n-ally.sourceLanguage": "en",
+  // "i18n-ally.displayLanguage": "zh-CN",
+  // "i18n-ally.keystyle": "nested",
+  // "i18n-ally.sortKeys": true,
+  // "i18n-ally.localesPaths": [
+  //   "locales"
+  // ],
+  // Disable the default formatter
+  "prettier.enable": false,
+  // Silent the stylistic rules in you IDE, but still auto fix them
+  // "eslint.rules.customizations": [
+  //   { "rule": "style/*", "severity": "off" },
+  //   { "rule": "format/*", "severity": "off" },
+  //   { "rule": "*-indent", "severity": "off" },
+  //   { "rule": "*-spacing", "severity": "off" },
+  //   { "rule": "*-spaces", "severity": "off" },
+  //   { "rule": "*-order", "severity": "off" },
+  //   { "rule": "*-dangle", "severity": "off" },
+  //   { "rule": "*-newline", "severity": "off" },
+  //   { "rule": "*quotes", "severity": "off" },
+  //   { "rule": "*semi", "severity": "off" }
+  // ],
+  // The following is optional.
+  // It's better to put under project setting `.vscode/settings.json`
+  // to avoid conflicts with working with different eslint configs
+  // that does not support all formats.
+  // "eslint.validate": [
+  //   "javascript",
+  //   "javascriptreact",
+  //   "typescript",
+  //   "typescriptreact",
+  //   "css",
+  //   "scss",
+  //   "vue",
+  //   "html",
+  //   "markdown",
+  //   "json",
+  //   "jsonc",
+  //   "yaml"
+  // ],
+  "files.associations": {
+    // 让 json 文件支持注释
+    // "*.json":"jsonc"
+  },
+  // iconify 匹配的前缀
+  "iconify.prefixes": [
+    "i-"
+  ],
+  "iconify.inplace": false
+}

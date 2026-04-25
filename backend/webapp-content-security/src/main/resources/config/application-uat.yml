@@ -1,0 +1,5 @@
+zving:
+  application:
+    init-license-on-start: false
+
+# Database connection is configured later when database initialization is actually needed.

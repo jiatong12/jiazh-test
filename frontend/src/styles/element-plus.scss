@@ -1,0 +1,258 @@
+:root {
+  // 让全局的边框弧度为
+  --el-border-radius-base: 8px;
+
+  // 页面背景颜色
+  --el-bg-color-page: #f3f5f9;
+
+  // 菜单的 padding
+  --el-menu-base-level-padding: 15px;
+
+  // --custom-radius: 1rem;
+  // --el-border-radius-base: calc(var(--custom-radius) / 3 + 2px) !important;
+  // --el-border-radius-small: calc(var(--custom-radius) / 3 + 4px) !important;
+  // --el-messagebox-border-radius: calc(var(--custom-radius) / 3 + 4px) !important;
+  // --el-popover-border-radius: calc(var(--custom-radius) / 3 + 4px) !important;
+}
+
+// 如果是用 additionalData 导入，将样式用 body 包裹一下，避免重复
+body {
+}
+
+/* 弹框和抽屉关闭按钮样式 */
+.el-drawer__header {
+  margin-bottom: 20px;
+}
+.el-drawer__header .el-icon.el-drawer__close,
+.el-dialog__header .el-dialog__close {
+  font-size: 1.5rem !important;
+  transition-duration: 300ms;
+  transition-property: transform;
+
+  // 放上去旋转90度
+  &:hover {
+    transform: rotate(90deg);
+  }
+}
+// 弹框
+.base-dialog {
+  padding: 0;
+
+  .el-dialog__header {
+    min-height: 50px;
+    padding: 15px 20px;
+    margin: 0;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+
+    .el-dialog__title {
+      font-size: 17px;
+    }
+  }
+
+  .el-dialog__body,
+  .el-dialog__footer {
+    padding: 15px 20px;
+  }
+}
+
+// 抽屉
+.base-drawer {
+  .el-drawer__header {
+    min-height: 50px;
+    padding: 16px 20px;
+    margin: 0;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+
+    span {
+      font-size: 17px;
+      line-height: 17px;
+      color: var(--el-text-color-primary) !important;
+    }
+  }
+
+  .el-drawer__footer {
+    border-top: 1px solid var(--el-border-color-lighter);
+  }
+}
+
+/* 按钮 */
+.el-button {
+  position: relative;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  &:not(.is-disabled):not(:disabled) {
+    &:active {
+      transform: translate(1px, 1px);
+    }
+  }
+}
+
+// // 实心按钮: 渐变 + 立体感
+// .el-button:not(.is-plain):not(.is-text):not(.is-link) {
+//   // 回退值（不支持 color-mix 时）
+//   --zv-btn-gradient-start: var(--el-button-bg-color);
+//   --zv-btn-gradient-end: var(--el-button-bg-color);
+//   --zv-btn-border-color: var(--el-button-border-color);
+//   // 动态计算（支持 color-mix 时）：避免白色按钮被压暗显小，同时保持立体感
+//   --zv-btn-gradient-start: color-mix(in srgb, var(--el-button-bg-color) 84%, #fff 16%);
+//   --zv-btn-gradient-end: color-mix(in srgb, var(--el-button-bg-color) 88%, #000 12%);
+//   --zv-btn-edge-shadow: color-mix(in srgb, var(--zv-btn-border-color) 62%, #000 38%);
+//   --zv-btn-top-highlight: color-mix(in srgb, #fff 68%, var(--el-button-bg-color) 32%);
+//   background-image: linear-gradient(180deg, var(--zv-btn-gradient-start), var(--zv-btn-gradient-end));
+//   border-color: var(--zv-btn-border-color);
+//   box-shadow:
+//     0 16px 22px -18px rgb(0 0 0 / 52%),
+//     0 6px 12px -10px rgb(0 0 0 / 30%),
+//     inset 0 -2px 0 var(--zv-btn-edge-shadow),
+//     inset 0 1px 0 var(--zv-btn-top-highlight);
+
+//   &:not(.is-disabled):not(:disabled) {
+//     &:hover {
+//       --zv-btn-gradient-start: color-mix(in srgb, var(--el-button-bg-color) 82%, #fff 18%);
+//       --zv-btn-gradient-end: color-mix(in srgb, var(--el-button-bg-color) 86%, #000 14%);
+//       box-shadow:
+//         0 20px 28px -20px rgb(0 0 0 / 56%),
+//         0 8px 14px -10px rgb(0 0 0 / 34%),
+//         inset 0 -2px 0 color-mix(in srgb, var(--zv-btn-border-color) 60%, #000 40%),
+//         inset 0 1px 0 color-mix(in srgb, #fff 74%, var(--el-button-bg-color) 26%);
+//       filter: saturate(1.07);
+//     }
+
+//     &:active {
+//       box-shadow:
+//         0 8px 12px -10px rgb(0 0 0 / 44%),
+//         0 3px 6px -6px rgb(0 0 0 / 26%),
+//         inset 0 -2px 0 color-mix(in srgb, var(--zv-btn-border-color) 68%, #000 32%),
+//         inset 0 1px 0 color-mix(in srgb, #fff 62%, var(--el-button-bg-color) 38%);
+//       filter: saturate(1.02);
+//     }
+//   }
+// }
+
+// // 按钮组: 避免每个子按钮阴影叠加导致视觉割裂，按钮组件的立体和动画效果都关闭
+// .el-button-group > .el-button:not(.is-plain):not(.is-text):not(.is-link) {
+//   // box-shadow: none;
+
+//   &:not(.is-disabled):not(:disabled) {
+//     &:hover,
+//     &:active {
+//       // transform: none;
+//       // box-shadow: none;
+//     }
+//   }
+// }
+
+// // 输入框追加/前置按钮: 保持与输入框一体化，禁用立体化样式（兼容 el-dropdown 包裹）
+// .el-input-group__append .el-button:not(.is-plain):not(.is-text):not(.is-link),
+// .el-input-group__prepend .el-button:not(.is-plain):not(.is-text):not(.is-link) {
+//   background: transparent;
+//   box-shadow: none;
+//   border-color: transparent;
+
+//   &:not(.is-disabled):not(:disabled) {
+//     &:hover,
+//     &:active {
+//       transform: none;
+//       box-shadow: none;
+//     }
+//   }
+// }
+
+/* v-loading */
+/* 完全替换为自定义图片 */
+.el-loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--zv-text-color-primary);
+  border-image: initial;
+  border-radius: 50%;
+  animation: 1s linear 0s infinite normal none running rotation;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: solid;
+    border-color: transparent transparent var(--zv-primary);
+    border-image: initial;
+  }
+
+  // @keyframes rotation {
+  //   0% {
+  //       transform: rotate(0deg);
+  //   }
+  //   100% {
+  //       transform: rotate(360deg);
+  //   }
+  // }
+  //   @keyframes rotationBack {
+  //     0% {
+  //         transform: rotate(0deg);
+  //     }
+  //     100% {
+  //         transform: rotate(-360deg);
+  //     }
+  //   }
+  //   border-width: 3px;
+  //   border-color: var(--zv-text-color-primary);
+  //   border-image: initial;
+  //   border-style: solid solid dotted dotted;
+  //   border-radius: 50%;
+  //   animation: 2s linear 0s infinite normal none running rotation;
+  //   &::after {
+  //     content: "";
+  //     position: absolute;
+  //     left: 0px;
+  //     right: 0px;
+  //     top: 0px;
+  //     bottom: 0px;
+  //     width: 24px;
+  //     height: 24px;
+  //     transform-origin: center center;
+  //     margin: auto;
+  //     border-width: 3px;
+  //     border-color: var(--zv-primary);
+  //     border-image: initial;
+  //     border-style: solid solid dotted;
+  //     border-radius: 50%;
+  //     animation: 1s linear 0s infinite normal none running rotationBack;
+  // }
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: var(--el-color-primary); // 使用 Element Plus 主题色
+  //   mask: url('@/assets/svg-icon/loading.svg') no-repeat center / contain;
+  //   -webkit-mask: url('@/assets/svg-icon/loading.svg') no-repeat center / contain;
+  // }
+
+  .circular {
+    display: none; /* 隐藏默认旋转器 */
+  }
+}

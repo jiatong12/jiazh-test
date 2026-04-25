@@ -1,0 +1,330 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1920 1080">
+  <!-- 定义滤镜和渐变 -->
+  <defs>
+    <!-- 左上角流光渐变 -->
+    <linearGradient id="topLeftStream" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#FFD700" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#FF8C00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 发光效果 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <!-- 底部流光渐变 -->
+    <linearGradient id="bottomStream" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffff"/>
+      <stop offset="50%" stop-color="#ff00ff"/>
+      <stop offset="100%" stop-color="#00ffaa"/>
+    </linearGradient>
+    
+    <!-- 边缘渐变 -->
+    <radialGradient id="edgeGlow" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="rgba(0, 255, 255, 0.3)"/>
+      <stop offset="100%" stop-color="rgba(0, 255, 255, 0)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 左上角流光遮罩组 -->
+  <g id="top-left-streams" opacity="0.8">
+    <!-- 左上角主流光（模拟遮罩效果，只露出右下边太阳） -->
+    <path id="top-left-main-stream" 
+          d="M-100,100 C50,50 200,80 300,150 S500,250 700,200" 
+          fill="none" stroke="url(#topLeftStream)" stroke-width="10" stroke-linecap="round"
+          stroke-dasharray="30,20">
+      <animate attributeName="stroke-dashoffset" from="0" to="50" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="d" 
+               values="M-100,100 C50,50 200,80 300,150 S500,250 700,200;
+                       M-100,120 C50,70 200,100 300,170 S500,270 700,220;
+                       M-100,100 C50,50 200,80 300,150 S500,250 700,200" 
+               dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- 左上角次流光 -->
+    <path id="top-left-secondary-stream" 
+          d="M-50,50 C100,30 250,60 350,130 S550,230 750,180" 
+          fill="none" stroke="url(#topLeftStream)" stroke-width="7" stroke-linecap="round"
+          stroke-dasharray="25,25">
+      <animate attributeName="stroke-dashoffset" from="50" to="0" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="d" 
+               values="M-50,50 C100,30 250,60 350,130 S550,230 750,180;
+                       M-50,70 C100,50 250,80 350,150 S550,250 750,200;
+                       M-50,50 C100,30 250,60 350,130 S550,230 750,180" 
+               dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="4s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- 左上角第三条流光 -->
+    <path id="top-left-third-stream" 
+          d="M0,0 C150,20 300,50 400,120 S600,220 800,170" 
+          fill="none" stroke="url(#topLeftStream)" stroke-width="5" stroke-linecap="round"
+          stroke-dasharray="20,30">
+      <animate attributeName="stroke-dashoffset" from="0" to="50" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="d" 
+               values="M0,0 C150,20 300,50 400,120 S600,220 800,170;
+                       M0,-20 C150,0 300,30 400,100 S600,200 800,150;
+                       M0,0 C150,20 300,50 400,120 S600,220 800,170" 
+               dur="16s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.8;0.5" dur="5s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- 添加流光粒子效果 -->
+    <g id="top-left-particles">
+      <!-- 第一条流光上的粒子 -->
+      <circle cx="0" cy="0" r="2" fill="#FFD700">
+        <animateMotion path="M-100,100 C50,50 200,80 300,150 S500,250 700,200" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      
+      <circle cx="0" cy="0" r="1.5" fill="#FFA500">
+        <animateMotion path="M-100,100 C50,50 200,80 300,150 S500,250 700,200" dur="10s" begin="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="1.5;2.5;1.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- 第二条流光上的粒子 -->
+      <circle cx="0" cy="0" r="1.8" fill="#FFD700">
+        <animateMotion path="M-50,50 C100,30 250,60 350,130 S550,230 750,180" dur="14s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="1.8;2.8;1.8" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- 第三条流光上的粒子 -->
+      <circle cx="0" cy="0" r="1.6" fill="#FFA500">
+        <animateMotion path="M0,0 C150,20 300,50 400,120 S600,220 800,170" dur="16s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="1.6;2.6;1.6" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- 底部粒子系统 -->
+  <g id="bottom-particles" opacity="0.7">
+    <!-- 底部连续粒子流动 -->
+    <g id="bottom-dense-particles">
+      <circle cx="0" cy="950" r="2" fill="#00ffff">
+        <animateMotion path="M0,0 L1920,0" dur="20s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-100" cy="970" r="1.8" fill="#00ffff">
+        <animateMotion path="M0,0 L2020,0" dur="22s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-200" cy="960" r="2.2" fill="#00ffff">
+        <animateMotion path="M0,0 L2120,0" dur="18s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-50" cy="980" r="1.5" fill="#00ffff">
+        <animateMotion path="M0,0 L1970,0" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-150" cy="940" r="2.5" fill="#00ffff">
+        <animateMotion path="M0,0 L2070,0" dur="26s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-250" cy="970" r="1.7" fill="#00ffff">
+        <animateMotion path="M0,0 L2170,0" dur="21s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-80" cy="950" r="2" fill="#00ffff">
+        <animateMotion path="M0,0 L2000,0" dur="23s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-300" cy="980" r="2.3" fill="#00ffff">
+        <animateMotion path="M0,0 L2220,0" dur="25s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.9s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-120" cy="960" r="1.9" fill="#00ffff">
+        <animateMotion path="M0,0 L2040,0" dur="19s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-180" cy="970" r="2.1" fill="#00ffff">
+        <animateMotion path="M0,0 L2100,0" dur="27s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.7s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- 第二行粒子 - 品红色连续流动 -->
+      <circle cx="0" cy="1000" r="2.2" fill="#ff00ff">
+        <animateMotion path="M0,0 L1920,0" dur="25s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-100" cy="1020" r="1.6" fill="#ff00ff">
+        <animateMotion path="M0,0 L2020,0" dur="28s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-200" cy="1010" r="2.4" fill="#ff00ff">
+        <animateMotion path="M0,0 L2120,0" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-50" cy="1030" r="1.8" fill="#ff00ff">
+        <animateMotion path="M0,0 L1970,0" dur="26s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-150" cy="990" r="2.7" fill="#ff00ff">
+        <animateMotion path="M0,0 L2070,0" dur="23s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-250" cy="1020" r="2" fill="#ff00ff">
+        <animateMotion path="M0,0 L2170,0" dur="27s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-80" cy="1000" r="2.3" fill="#ff00ff">
+        <animateMotion path="M0,0 L2000,0" dur="29s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-300" cy="1030" r="1.9" fill="#ff00ff">
+        <animateMotion path="M0,0 L2220,0" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.9s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-120" cy="1010" r="2.5" fill="#ff00ff">
+        <animateMotion path="M0,0 L2040,0" dur="26s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3.3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-180" cy="1020" r="2.1" fill="#ff00ff">
+        <animateMotion path="M0,0 L2100,0" dur="22s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.7s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- 第三行粒子 - 绿色连续流动 -->
+      <circle cx="0" cy="1050" r="2" fill="#00ffaa">
+        <animateMotion path="M0,0 L1920,0" dur="30s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-100" cy="1070" r="1.7" fill="#00ffaa">
+        <animateMotion path="M0,0 L2020,0" dur="28s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-200" cy="1040" r="2.3" fill="#00ffaa">
+        <animateMotion path="M0,0 L2120,0" dur="32s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-50" cy="1060" r="1.9" fill="#00ffaa">
+        <animateMotion path="M0,0 L1970,0" dur="27s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-150" cy="1030" r="2.6" fill="#00ffaa">
+        <animateMotion path="M0,0 L2070,0" dur="31s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-250" cy="1060" r="2.1" fill="#00ffaa">
+        <animateMotion path="M0,0 L2170,0" dur="29s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-80" cy="1050" r="2.4" fill="#00ffaa">
+        <animateMotion path="M0,0 L2000,0" dur="33s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-300" cy="1070" r="2" fill="#00ffaa">
+        <animateMotion path="M0,0 L2220,0" dur="26s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.9s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-120" cy="1040" r="2.5" fill="#00ffaa">
+        <animateMotion path="M0,0 L2040,0" dur="34s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3.3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- 底部流光线条 -->
+  <g id="bottom-streams" opacity="0.5">
+    <!-- 底部主流光 -->
+    <path id="bottom-main-stream" d="M-100,900 Q300,850 600,950 T1200,850 T1800,950 T2200,900" 
+          fill="none" stroke="url(#bottomStream)" stroke-width="3" stroke-dasharray="15,10">
+      <animate attributeName="stroke-dashoffset" from="0" to="25" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="d" 
+               values="M-100,900 Q300,850 600,950 T1200,850 T1800,950 T2200,900;
+                       M-100,920 Q300,870 600,970 T1200,870 T1800,970 T2200,920;
+                       M-100,900 Q300,850 600,950 T1200,850 T1800,950 T2200,900" 
+               dur="12s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- 底部次流光 -->
+    <path id="bottom-secondary-stream" d="M-100,1050 Q400,1000 700,1100 T1300,1000 T1900,1100 T2300,1050" 
+          fill="none" stroke="url(#bottomStream)" stroke-width="2" stroke-dasharray="10,15">
+      <animate attributeName="stroke-dashoffset" from="25" to="0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="d" 
+               values="M-100,1050 Q400,1000 700,1100 T1300,1000 T1900,1100 T2300,1050;
+                       M-100,1030 Q400,980 700,1080 T1300,980 T1900,1080 T2300,1030;
+                       M-100,1050 Q400,1000 700,1100 T1300,1000 T1900,1100 T2300,1050" 
+               dur="15s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- 底部脉动焦点 -->
+  <g id="bottom-pulsing-focus" opacity="0.3">
+    <!-- 底部中心焦点 -->
+    <ellipse cx="960" cy="1080" rx="400" ry="100" fill="none" stroke="url(#edgeGlow)" stroke-width="3">
+      <animate attributeName="ry" values="100;150;100" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-opacity" values="0.2;0.4;0.2" dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- 底部两侧焦点 -->
+    <ellipse cx="300" cy="1080" rx="200" ry="80" fill="none" stroke="rgba(255, 0, 255, 0.2)" stroke-width="2">
+      <animate attributeName="ry" values="80;120;80" dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-opacity" values="0.15;0.3;0.15" dur="10s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <ellipse cx="1620" cy="1080" rx="200" ry="80" fill="none" stroke="rgba(0, 255, 170, 0.2)" stroke-width="2">
+      <animate attributeName="ry" values="80;120;80" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-opacity" values="0.15;0.35;0.15" dur="11s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- 底部小焦点 -->
+    <circle cx="100" cy="1080" r="60" fill="none" stroke="rgba(0, 255, 255, 0.15)" stroke-width="1">
+      <animate attributeName="r" values="60;90;60" dur="9s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle cx="1820" cy="1080" r="60" fill="none" stroke="rgba(255, 0, 255, 0.15)" stroke-width="1">
+      <animate attributeName="r" values="60;90;60" dur="11s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- 垂直边缘粒子 -->
+  <g id="vertical-edge-particles" opacity="0.4">
+    <!-- 左侧边缘粒子 -->
+    <g id="left-edge-particles">
+      <circle cx="20" cy="200" r="1.5" fill="#00ffff">
+        <animate attributeName="cy" values="200;250;200" dur="5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="20" cy="400" r="1.8" fill="#ff00ff">
+        <animate attributeName="cy" values="400;450;400" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="20" cy="600" r="2" fill="#00ffaa">
+        <animate attributeName="cy" values="600;650;600" dur="7s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="20" cy="800" r="1.7" fill="#00ffff">
+        <animate attributeName="cy" values="800;850;800" dur="5.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- 右侧边缘粒子 -->
+    <g id="right-edge-particles">
+      <circle cx="1900" cy="250" r="1.8" fill="#ff00ff">
+        <animate attributeName="cy" values="250;300;250" dur="6.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="1900" cy="450" r="2.1" fill="#00ffff">
+        <animate attributeName="cy" values="450;500;450" dur="5.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="1900" cy="650" r="1.6" fill="#00ffaa">
+        <animate attributeName="cy" values="650;700;650" dur="7.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="5.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="1900" cy="850" r="2.3" fill="#00ffff">
+        <animate attributeName="cy" values="850;900;850" dur="6.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4.8s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+</svg>

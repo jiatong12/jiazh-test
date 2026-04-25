@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1920" height="360" viewBox="0 0 1920 360" version="1.1" id="svg10" sodipodi:docname="login_bg_4.svg" inkscape:version="1.2.2 (732a01da63, 2022-12-09)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview id="namedview12" pagecolor="#ffffff" bordercolor="#111111" borderopacity="1" inkscape:showpageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="1" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="10.48" inkscape:cx="1456" inkscape:cy="205.7" inkscape:window-width="2560" inkscape:window-height="1009" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="蒙版组_3" />
+  <defs id="defs4">
+    <clipPath id="clip-path">
+      <rect id="矩形_18" data-name="矩形 18" width="1920" height="360" transform="translate(0 732)" fill="#fff" />
+    </clipPath>
+  </defs>
+  <g id="蒙版组_3" data-name="蒙版组 3" transform="translate(0 -732)" clip-path="url(#clip-path)">
+    <path id="路径_8" data-name="路径 8" d="M 2451,934 C 2226,795.4 2013,747.8 1700,860.1 1386,972.5 1294,932.8 1027,863.9 662,769.6 579,1021 310,937.2 216.5,892.8 58.73,807.6 -50,805.2 l 18,309.8 h 2498 z" fill="#e0e0e0" stroke="#ffffff" stroke-width="1" sodipodi:nodetypes="cssccccc" style="fill:#dedede;fill-opacity:1" />
+    <path id="路径_9" data-name="路径 9" d="m -86,960 c 207,-138.6 392,-170.6 690,-83.9 299,86.9 593,48.3 838,-20 245,-68.3 313,150.9 636,40.5 106,-44.9 118,68.8 118,68.8 V 1131 H -100 Z" fill="#c9c9c9" stroke="#ffffff" stroke-width="1" opacity="0.4" sodipodi:nodetypes="cssccccc" />
+    <path id="路径_10" data-name="路径 10" d="m -157,907.1 c 0,0 238.88,131.9 453.7,33.9 5.3,0.4 -0.2,0.1 0,0 319.2,-163.8 408.9,129 827.3,52 419,-77.9 499,-149 869,19 10,72 13,137 13,137 H -157 Z" fill="#fff" stroke="#ffffff" stroke-width="1" opacity="0.56" style="fill:#e9e9e9;fill-opacity:1" />
+  </g>
+</svg>
